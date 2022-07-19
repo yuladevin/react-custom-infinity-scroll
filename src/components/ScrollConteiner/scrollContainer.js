@@ -1,5 +1,6 @@
 import React, { useRef, useCallback } from "react"
 import {useMount} from "react-use"
+import './scrollContainer.css'
 
 const ScrollContainer = ({ children, onScroll, onMount }) => {
     const containerRef = useRef(null)
@@ -20,7 +21,7 @@ const ScrollContainer = ({ children, onScroll, onMount }) => {
     )
 
     return (
-        <div className="container" onScroll={handleScroll} ref={containerRef}>
+        <div className="scroll-container" onScroll={handleScroll} ref={containerRef}>
             {children}
         </div>
     )
