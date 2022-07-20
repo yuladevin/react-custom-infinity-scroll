@@ -1,9 +1,12 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, memo, lazy, Suspense } from "react"
 import throttle from "lodash/throttle"
 import {nanoid} from "nanoid"
 
+// const List = lazy(()=>import('./components/List/list'))
+const LazyLoad = lazy(()=>import('./components/LazyLoad/lazyLoad'))
+// const ScrollContainer = lazy(()=>import('./components/ScrollConteiner/scrollContainer'))
 import List from "./components/List/list"
-import LazyLoad from "./components/LazyLoad/lazyLoad"
+// import LazyLoad from "./components/LazyLoad/lazyLoad"
 import ScrollContainer from "./components/ScrollConteiner/scrollContainer"
 
 function App() {
@@ -38,15 +41,17 @@ function App() {
 	return (
 		<div className="App">
 			<ScrollContainer onScroll={onScroll} onMount={onMount}>
-				<LazyLoad
-					scrollTop={scrollTop}
-					scrollContainerRect={scrollContainerRect}
-					onIntersection={appendItems}
-				>
-					<List itemsArray={items} />
-				</LazyLoad>
+				<Suspense fallback="Loading...">
+					<LazyLoad
+						scrollTop={scrollTop}
+						scrollContainerRect={scrollContainerRect}
+						onIntersection={appendItems}
+					>
+							<List itemsArray={items} />
+					</LazyLoad>
+				</Suspense>
 			</ScrollContainer>
 		</div>
 	)
 }
-export default App
+export default memo(App)
