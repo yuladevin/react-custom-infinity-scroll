@@ -2,12 +2,9 @@ import React, { useState, useCallback, memo, lazy, Suspense } from "react"
 import throttle from "lodash/throttle"
 import {nanoid} from "nanoid"
 
-// const List = lazy(()=>import('./components/List/list'))
+const List = lazy(()=>import('./components/List/list'))
 const LazyLoad = lazy(()=>import('./components/LazyLoad/lazyLoad'))
-// const ScrollContainer = lazy(()=>import('./components/ScrollConteiner/scrollContainer'))
-import List from "./components/List/list"
-// import LazyLoad from "./components/LazyLoad/lazyLoad"
-import ScrollContainer from "./components/ScrollConteiner/scrollContainer"
+const ScrollContainer = lazy(()=>import('./components/ScrollConteiner/scrollContainer'))
 
 function App() {
 	const [scrollContainerRect, setScrollContainerRect] = useState({})
@@ -40,17 +37,21 @@ function App() {
 
 	return (
 		<div className="App">
-			<ScrollContainer onScroll={onScroll} onMount={onMount}>
-				<Suspense fallback="Loading...">
-					<LazyLoad
-						scrollTop={scrollTop}
-						scrollContainerRect={scrollContainerRect}
-						onIntersection={appendItems}
-					>
-							<List itemsArray={items} />
-					</LazyLoad>
-				</Suspense>
-			</ScrollContainer>
+			<Suspense fallback="Loading...">
+				<ScrollContainer onScroll={onScroll} onMount={onMount}>
+					<Suspense fallback="Loading...">
+						<LazyLoad
+							scrollTop={scrollTop}
+							scrollContainerRect={scrollContainerRect}
+							onIntersection={appendItems}
+						>
+							<Suspense fallback="Loading...">
+								<List itemsArray={items} />
+							</Suspense>
+						</LazyLoad>
+					</Suspense>
+				</ScrollContainer>
+			</Suspense>
 		</div>
 	)
 }
