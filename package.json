@@ -36,5 +36,8 @@
   "main": "index.js",
   "repository": "https://github.com/yuladevin/react-custom-infinity-scroll.git",
   "author": "yuladevin <yuladevin@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@welldone-software/why-did-you-render": "^7.0.1"
+  }
 }
