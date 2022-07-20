@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import './list.css'
 
 const List = ({ itemsArray }) => (
@@ -9,6 +9,6 @@ const List = ({ itemsArray }) => (
                 ))}
             </ul>
     </div>
-);
+)
 
-export default List;
+export default memo(List)

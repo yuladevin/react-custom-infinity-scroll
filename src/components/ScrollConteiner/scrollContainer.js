@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react"
+import React, { useRef, useCallback, memo } from "react"
 import {useMount} from "react-use"
 import './scrollContainer.css'
 
@@ -27,4 +27,4 @@ const ScrollContainer = ({ children, onScroll, onMount }) => {
     )
 }
 
-export default ScrollContainer
+export default memo(ScrollContainer)

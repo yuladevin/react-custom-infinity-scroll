@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef, memo } from "react"
 
 const LazyLoader = ({
                         scrollTop,
@@ -33,4 +33,4 @@ const LazyLoader = ({
     )
 }
 
-export default LazyLoader
+export default memo(LazyLoader)
